@@ -1,0 +1,8 @@
+node_modules/
+dist/
+submissions.json
+.data/
+assets/images/forgetful_trailer.mp4
+assets/portfolio_stuff/Portfolio stuff/FORGETFULL GAMEPLAY TRAILER KBON (5th Ver).mp4
+.DS_Store
+npm-debug.log*

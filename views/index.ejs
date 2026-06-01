@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="creativa">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Skyball Studio | Contemporary Game Development</title>
+  <meta name="description"
+    content="Skyball Studio is an independent boutique game studio building immersive interactive experiences. Creators of Forgetful and School Buddies.">
+  <meta name="keywords"
+    content="Skyball Studio, Game Development, Boutique Game Studio, Forgetful, School Buddies, 3D Games, 2D Platformer">
+
+  <link rel="icon" type="image/png" href="/assets/skyball/Skyball/1.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <div class="grid-overlay"></div>
+
+  <div class="aura-container">
+    <div class="aura-blob aura-1"></div>
+    <div class="aura-blob aura-2"></div>
+  </div>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo-link">
+        <img src="/assets/skyball/Skyball/1.png" alt="Skyball Logo" class="logo-img">
+        <span class="logo-text">SKYBALL</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#" class="nav-link">Home</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#departments" class="nav-link">Departments</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-socials">
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="social-icon"><i
+            class="fab fa-linkedin-in"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-icon"><i
+            class="fab fa-instagram"></i></a>
+        <a href="mailto:skyballstudio@gmail.com" aria-label="Email" class="social-icon"><i
+            class="far fa-envelope"></i></a>
+      </div>
+
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">SKYBALL STUDIO</h1>
+        <p class="hero-desc">An independent game development studio built on a simple idea—there’s always more that
+          games can become. We build through deliberate exploration, not repetitive formulas.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="premium-btn premium-btn-primary">Explore Projects</a>
+          <a href="#contact" class="premium-btn">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" onclick="document.getElementById('philosophy').scrollIntoView({behavior: 'smooth'})">
+      <span class="monospaced-tag">Scroll Down</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!--
+  <section class="section" id="philosophy">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Core Philosophy</span>
+        <h2 class="section-title">The Dual Forces of Creation</h2>
+        <p class="section-desc">We structure our pipeline around two balanced mindsets that ensure dynamic artistic
+          development and technical precision.</p>
+      </div>
+
+      <div class="philosophy-grid">
+        <div class="phil-card creativa active">
+          <div class="phil-header">
+            <span class="phil-badge">Creativa Division</span>
+            <span class="phil-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+          </div>
+          <h3 class="phil-title">Creativa</h3>
+          <p class="phil-desc">Where everything starts. It is our sandbox for concepts, fluid experimentation, and bold
+            ideas. Here we question what exists and let aesthetics evolve organically without premature constraints.</p>
+          <div class="phil-features">
+            <div class="phil-feature-item">
+              <span class="phil-icon"><i class="fa-solid fa-compass"></i></span>
+              <div>
+                <strong>Aesthetic Exploration</strong>
+                <p>Freeform visual character designing, environmental sketching, and style guide drafts.</p>
+              </div>
+            </div>
+            <div class="phil-feature-item">
+              <span class="phil-icon"><i class="fa-solid fa-palette"></i></span>
+              <div>
+                <strong>Concept Art Mechanics</strong>
+                <p>Developing characters and assets ranging from minimal 2D vectors to stylized paintings.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phil-card celeste">
+          <div class="phil-header">
+            <span class="phil-badge">Celeste Division</span>
+            <span class="phil-icon"><i class="fa-solid fa-terminal"></i></span>
+          </div>
+          <h3 class="phil-title">Celeste</h3>
+          <p class="phil-desc">Where concepts become playable. Celeste introduces modular planning, rigid workflow, and
+            engine integration, turning creative visions into highly polished, performant, and stable assets.</p>
+          <div class="phil-features">
+            <div class="phil-feature-item">
+              <span class="phil-icon"><i class="fa-solid fa-cubes"></i></span>
+              <div>
+                <strong>Technical Execution</strong>
+                <p>Translating artwork into optimized 3D polygons, modular grids, and interactive gameplay loops.</p>
+              </div>
+            </div>
+            <div class="phil-feature-item">
+              <span class="phil-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <div>
+                <strong>Quality Assurance</strong>
+                <p>Rigorous iterative testing, performance bug tracking, and code refactoring protocols.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Our Projects</span>
+        <h2 class="section-title">Selected Works</h2>
+        <p class="section-desc">Selected game releases demonstrating our focus on atmospheric environments and
+          player-driven storylines.</p>
+      </div>
+
+      <div class="projects-container">
+        <div class="project-item">
+          <div class="video-player-wrapper">
+            <video class="custom-video"
+              poster="/assets/skyball/Skyball/ChatGPT%20Image%20May%2018,%202025,%2001_32_52%20AM.png"
+              preload="metadata">
+              <source src="/assets/images/forgetful_trailer.web.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay-play">
+              <div class="play-circle"><i class="fa-solid fa-play"></i></div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <span class="monospaced-tag">Completed Project</span>
+            <h3 class="project-name">Forgetful</h3>
+            <p class="project-description">A story-driven 2D platformer set in a dream-like, shifting cosmos. Players
+              guide a character who has lost his identity. The game seamlessly embeds narrative in the layout: levels
+              repeat familiar paths with subtle, mind-bending changes—platforms disappear, details turn invisible, and
+              assets fade away, mirroring the character's deteriorating memory.</p>
+
+            <div class="project-metadata">
+              <div class="meta-col">
+                <span class="meta-label">Genre</span>
+                <span class="meta-value">Story Platformer</span>
+              </div>
+              <div class="meta-col">
+                <span class="meta-label">Art Direction</span>
+                <span class="meta-value">Minimal Hand-Painted 2D</span>
+              </div>
+            </div>
+
+            <div>
+              <a href="#contact" class="premium-btn">Connect With Us</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-item reverse">
+          <div class="project-info">
+            <span class="monospaced-tag">Ongoing Project</span>
+            <h3 class="project-name">School Buddies</h3>
+            <p class="project-description">An episodic 3D third-person social simulator set in a highly responsive
+              school campus. The story unfolds in structured chapters as a transfer student navigates tight social
+              groups. Conversations, reputations, and dynamics change in real time across labs, classes, and social
+              grounds, forcing difficult player choices.</p>
+
+            <div class="project-metadata">
+              <div class="meta-col">
+                <span class="meta-label">Genre</span>
+                <span class="meta-value">Social Simulator / RPG</span>
+              </div>
+              <div class="meta-col">
+                <span class="meta-label">Art Direction</span>
+                <span class="meta-value">Stylized 3D, Hand-Painted Textures</span>
+              </div>
+            </div>
+
+            <div>
+              <a href="#contact" class="premium-btn">Start A Project</a>
+            </div>
+          </div>
+
+          <div class="sb-character-container">
+            <div class="sb-character-card">
+              <div class="character-card-glow"></div>
+              <div class="sb-img-wrapper">
+                <img src="/assets/portfolio_stuff/Portfolio%20stuff/max.png" alt="Max Portrait"
+                  class="sb-character-img">
+              </div>
+              <div class="sb-card-details">
+                <h4 class="sb-char-name">MAX</h4>
+                <span class="sb-char-role">Main Character</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="departments">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Capabilities</span>
+        <h2 class="section-title">Studio Departments</h2>
+        <p class="section-desc">Providing full game design services from initial paper concept blueprints to final gold
+          master deployment.</p>
+      </div>
+
+      <div class="departments-grid">
+        <div class="dept-card">
+          <div class="dept-icon"><i class="fa-solid fa-paintbrush"></i></div>
+          <h3 class="dept-title">2D Concept</h3>
+          <p class="dept-desc">Developing early visual foundations, character drafts, layout storyboards, and
+            environment concept references to lock in visual style guides.</p>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-icon"><i class="fa-solid fa-cube"></i></div>
+          <h3 class="dept-title">3D Modeling</h3>
+          <p class="dept-desc">Translating visual art into fully optimized, high-fidelity 3D assets, meshes, maps,
+            props, and dynamic characters ready for engine integration.</p>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-icon"><i class="fa-solid fa-map"></i></div>
+          <h3 class="dept-title">Level Design</h3>
+          <p class="dept-desc">Crafting detailed maps, progressive player paths, and environmental hazards. Balances
+            efficient modular grids with custom showcase visual landmarks.</p>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-icon"><i class="fa-solid fa-gamepad"></i></div>
+          <h3 class="dept-title">Systems Design</h3>
+          <p class="dept-desc">Structuring the fundamental math behind interaction loops, combat equations, branching
+            conversations, UI layouts, and core mechanic controllers.</p>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-icon"><i class="fa-solid fa-music"></i></div>
+          <h3 class="dept-title">Sound Design</h3>
+          <p class="dept-desc">Composing deep ambient atmospheric tracks, localized spatial sound effects, voice
+            overlays, and acoustic triggers to fully envelop the player.</p>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-icon"><i class="fa-solid fa-file-pen"></i></div>
+          <h3 class="dept-title">Narrative</h3>
+          <p class="dept-desc">Drafting extensive lore bibles, script dialogue sheets, NPC conversation trees,
+            environmental journals, and localized game text scripts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  <section class="section" id="showcase">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Aesthetics</span>
+        <h2 class="section-title">Creative Portfolio</h2>
+        <p class="section-desc">A refined showcase of concept pieces, high-poly models, layouts, and illustrative
+          renders by studio team members.</p>
+      </div>
+
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="2d">2D Art</button>
+        <button class="filter-btn" data-filter="3d">3D Renders</button>
+        <button class="filter-btn" data-filter="storyboard">Storyboards</button>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item" data-category="2d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-naruto-brosa-02.jpg"
+          data-title="Naruto Brosa Illustration" data-author="Abhijeet Ranjan">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-naruto-brosa-02.jpg" alt="Naruto"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">2D Concept</span>
+            <h4 class="gallery-item-title">Naruto Brosa</h4>
+            <span class="gallery-item-author">By Abhijeet Ranjan</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="2d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-naruto-brosa-02-5.jpg"
+          data-title="Naruto Brosa Detail" data-author="Abhijeet Ranjan">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-naruto-brosa-02-5.jpg" alt="Naruto Detail"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">2D Concept</span>
+            <h4 class="gallery-item-title">Naruto Detail</h4>
+            <span class="gallery-item-author">By Abhijeet Ranjan</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="2d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-portrait-04.jpg"
+          data-title="Stylized Portrait Study" data-author="Abhijeet Ranjan">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-portrait-04.jpg" alt="Portrait Study"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">2D Concept</span>
+            <h4 class="gallery-item-title">Character Portrait</h4>
+            <span class="gallery-item-author">By Abhijeet Ranjan</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="3d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/pritam-kundu-3d_fi_-fresya-pose-3-with-bg.jpg"
+          data-title="Fresya Mesh Render" data-author="Pritam Kundu">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/pritam-kundu-3d_fi_-fresya-pose-3-with-bg.jpg"
+            alt="Fresya Mesh" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">3D Render</span>
+            <h4 class="gallery-item-title">Fresya Pose</h4>
+            <span class="gallery-item-author">By Pritam Kundu</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="3d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/pritam-kundu-3d_fi_-frogspidey-dop.jpg"
+          data-title="FrogSpidey Model" data-author="Pritam Kundu">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/pritam-kundu-3d_fi_-frogspidey-dop.jpg" alt="FrogSpidey"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">3D Render</span>
+            <h4 class="gallery-item-title">FrogSpidey Concept</h4>
+            <span class="gallery-item-author">By Pritam Kundu</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="3d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-cooking-pot.jpg"
+          data-title="Stylized Cooking Pot Prop" data-author="Pallavi Issrani">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-cooking-pot.jpg" alt="Cooking Pot"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">3D Render</span>
+            <h4 class="gallery-item-title">Cooking Pot Prop</h4>
+            <span class="gallery-item-author">By Pallavi Issrani</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="3d"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-render2.jpg"
+          data-title="Environment Prop Study" data-author="Pallavi Issrani">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-render2.jpg" alt="Render Study"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">3D Render</span>
+            <h4 class="gallery-item-title">Asset Study</h4>
+            <span class="gallery-item-author">By Pallavi Issrani</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="storyboard"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/storyboard.png" data-title="Forgetful Layout Blueprint"
+          data-author="Skyball Storyboards">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/storyboard.png" alt="Forgetful Storyboard"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">Storyboards</span>
+            <h4 class="gallery-item-title">Forgetful Layout</h4>
+            <span class="gallery-item-author">Skyball Studio</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="storyboard"
+          data-src="/assets/portfolio_stuff/Portfolio%20stuff/storyboard1.png" data-title="Forgetful Scene Progression"
+          data-author="Skyball Storyboards">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/storyboard1.png" alt="Forgetful Storyboard"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">Storyboards</span>
+            <h4 class="gallery-item-title">Scene Transitions</h4>
+            <span class="gallery-item-author">Skyball Studio</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="2d" data-src="/assets/portfolio_stuff/Portfolio%20stuff/SIlksong.png"
+          data-title="Silksong Vector Art" data-author="Skyball Art Team">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/SIlksong.png" alt="Silksong Vector"
+            class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">2D Concept</span>
+            <h4 class="gallery-item-title">Silksong Tribute</h4>
+            <span class="gallery-item-author">Skyball Studio</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="3d" data-src="/assets/portfolio_stuff/Portfolio%20stuff/Ac Duct.jpg"
+          data-title="Industrial AC Duct Prop" data-author="Skyball Environment Team">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/Ac Duct.jpg" alt="AC Duct Prop" class="gallery-item-img"
+            loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">3D Render</span>
+            <h4 class="gallery-item-title">AC Duct Prop Model</h4>
+            <span class="gallery-item-author">Skyball Environment Team</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="2d" data-src="/assets/portfolio_stuff/Portfolio%20stuff/mourn.jpg"
+          data-title="Mourn - Scene Concept" data-author="Skyball 2D Division">
+          <img src="/assets/portfolio_stuff/Portfolio%20stuff/mourn.jpg" alt="Mourn" class="gallery-item-img"
+            loading="lazy">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-cat">2D Concept</span>
+            <h4 class="gallery-item-title">Mourn Mood Art</h4>
+            <span class="gallery-item-author">Skyball Studio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox-modal">
+    <button class="lightbox-close" aria-label="Close Lightbox"><i class="fa-solid fa-xmark"></i></button>
+    <div class="lightbox-content-wrapper">
+      <img src="" alt="Lightbox View" class="lightbox-img">
+      <div class="lightbox-meta">
+        <h4 class="lightbox-title">Artwork Title</h4>
+        <span class="lightbox-author">Artist Name</span>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Connect</span>
+        <h2 class="section-title">Start a Project</h2>
+        <p class="section-desc">Connect with our core team. Send a detailed message or inspect our corporate business
+          card for active channels.</p>
+      </div>
+
+      <div class="contact-section-inner">
+        <div class="card-3d-wrapper">
+          <div class="business-card-container" id="business-card">
+            <div class="card-face front">
+              <img src="/assets/skyball/Skyball/card/front.png" alt="Skyball Business Card Front"
+                class="card-vector-img">
+            </div>
+            <div class="card-face back">
+              <img src="/assets/skyball/Skyball/card/back.png" alt="Skyball Business Card Back" class="card-vector-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-panel">
+          <div class="form-header">
+            <h3 class="form-title">Message Server</h3>
+            <p class="form-subtitle">Fill in your information below to establish a direct channel.</p>
+          </div>
+
+          <div class="contact-details-box">
+            <div class="detail-row">
+              <i class="fa-solid fa-phone"></i>
+              <span><span class="detail-label">Phone:</span>+91 94134 17730</span>
+            </div>
+            <div class="detail-row">
+              <i class="fa-solid fa-envelope"></i>
+              <span><span class="detail-label">Email:</span>skyballstudio@gmail.com</span>
+            </div>
+            <div class="detail-row">
+              <i class="fa-solid fa-location-dot"></i>
+              <span><span class="detail-label">Address:</span>School Ki dhyani, Kachroda, Phulera-Jaipur, Rajasthan
+                (303338)</span>
+            </div>
+          </div>
+
+          <form id="skyball-contact-form" autocomplete="off">
+            <div class="form-group">
+              <input type="text" id="form-name" class="form-input" placeholder=" " required>
+              <label for="form-name" class="form-label">Name</label>
+            </div>
+
+            <div class="form-group">
+              <input type="email" id="form-email" class="form-input" placeholder=" " required>
+              <label for="form-email" class="form-label">Email Address</label>
+            </div>
+
+            <div class="form-group">
+              <textarea id="form-message" class="form-input" placeholder=" " required></textarea>
+              <label for="form-message" class="form-label">Message Details</label>
+            </div>
+
+            <button type="submit" class="form-submit-btn">
+              Send Message
+            </button>
+
+            <div class="form-status"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <a href="#" class="logo-link">
+            <img src="/assets/skyball/Skyball/1.png" alt="Skyball Logo" class="logo-img" style="height: 30px;">
+            <span class="logo-text" style="font-size: 1.6rem;">SKYBALL</span>
+          </a>
+          <p class="footer-desc" style="margin-top: 1rem;">Building meaningful gameplay and atmospheric cosmic worlds
+            through deliberate pre-production, creative iteration, and technical precision.</p>
+          <div class="header-socials" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="social-icon"><i
+                class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-icon"><i
+                class="fab fa-instagram"></i></a>
+            <a href="mailto:skyballstudio@gmail.com" aria-label="Email" class="social-icon"><i
+                class="far fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Home</a></li>
+            <li><a href="#projects" class="footer-link">Projects</a></li>
+            <li><a href="#departments" class="footer-link">Departments</a></li>
+            <li><a href="#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Works</h4>
+          <ul class="footer-links">
+            <li><a href="#projects" class="footer-link">Forgetful (2D Platformer)</a></li>
+            <li><a href="#projects" class="footer-link">School Buddies (3D Simulator)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Connect Channels</h4>
+          <ul class="footer-links">
+            <li class="footer-contact-item">
+              <span class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></span>
+              <span>skyballstudio@gmail.com</span>
+            </li>
+            <li class="footer-contact-item">
+              <span class="footer-contact-icon"><i class="fa-solid fa-phone"></i></span>
+              <span>+91 94134 17730</span>
+            </li>
+            <li class="footer-contact-item">
+              <span class="footer-contact-icon"><i class="fa-solid fa-terminal"></i></span>
+              <span>Jaipur, Rajasthan (303338)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="copyright">&copy; 2026 Skyball Studio. All rights reserved. Precision-engineered for ultimate
+          playability.</span>
+        <ul class="footer-sublinks">
+          <li><a href="#" class="footer-sublink">Privacy Policy</a></li>
+          <li><a href="#" class="footer-sublink">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= member.theme %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Optimization -->
+  <title><%= member.name %> | Skyball Studio Portfolio</title>
+  <meta name="description" content="View the game development concept art, 3D meshes, and technical assets crafted by <%= member.name %>, <%= member.role %> at Skyball Studio.">
+  
+  <!-- Corporate Icons -->
+  <link rel="icon" type="image/png" href="/assets/skyball/Skyball/1.png">
+  
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Modern Design System Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Fine Structural Tech Grid Overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- Ambient Shifting Aura Glows (Drifting Blobs customized by artist theme) -->
+  <div class="aura-container">
+    <div class="aura-blob aura-1"></div>
+    <div class="aura-blob aura-2"></div>
+  </div>
+
+  <!-- ==========================================================================
+       HEADER BAR
+       ========================================================================== -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo-link" style="gap: 1.5rem;">
+        <i class="fa-solid fa-arrow-left" style="font-size: 1.1rem; color: var(--text-muted);"></i>
+        <span class="logo-text" style="font-size: 1.4rem; font-weight: 300;">Return Home</span>
+      </a>
+
+      <a href="/" class="logo-link">
+        <img src="/assets/skyball/Skyball/1.png" alt="Skyball Logo" class="logo-img" style="height: 30px;">
+        <span class="logo-text" style="font-size: 1.6rem; letter-spacing: 0.05em;">SKYBALL</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       ARTIST PROFILE HERO
+       ========================================================================== -->
+  <section class="hero" id="profile-hero">
+    <div class="container">
+      <div class="hero-content" style="gap: 1.5rem;">
+        <span class="monospaced-tag">ROLE // <%= member.role %></span>
+        <h1 class="hero-title" style="font-size: 8rem; line-height: 0.9;"><%= member.name %></h1>
+        <span class="monospaced-tag" style="color: var(--text-muted);"><%= member.department %></span>
+        <p class="hero-desc" style="max-width: 750px; margin-top: 1rem;"><%= member.bio %></p>
+        
+        <div class="hero-cta" style="margin-top: 1.5rem;">
+          <a href="#works" class="premium-btn premium-btn-primary">View Works</a>
+          <a href="#contact-artist" class="premium-btn">Send Message</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ARTIST SHOWCASE GALLERY
+       ========================================================================== -->
+  <section class="section" id="works">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Showcase</span>
+        <h2 class="section-title">Featured Works</h2>
+        <p class="section-desc">Inspect dynamic concept meshes, maps, and drawings completed by <%= member.name %> for Skyball Studio projects.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <% member.artworks.forEach(function(artwork) { %>
+          <div class="gallery-item" data-category="artist-work" data-src="<%= artwork.src %>" data-title="<%= artwork.title %>" data-author="<%= member.name %>">
+            <img src="<%= artwork.src %>" alt="<%= artwork.title %>" class="gallery-item-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-cat"><%= artwork.category %></span>
+              <h4 class="gallery-item-title"><%= artwork.title %></h4>
+              <span class="gallery-item-author"><%= artwork.desc %></span>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Lightbox Modal -->
+  <div class="lightbox-modal">
+    <button class="lightbox-close" aria-label="Close Lightbox"><i class="fa-solid fa-xmark"></i></button>
+    <div class="lightbox-content-wrapper">
+      <img src="" alt="Lightbox View" class="lightbox-img">
+      <div class="lightbox-meta">
+        <h4 class="lightbox-title">Artwork Title</h4>
+        <span class="lightbox-author">Artist Name</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TARGETED CONTACT SECTION
+       ========================================================================== -->
+  <section class="section" id="contact-artist">
+    <div class="container">
+      <div class="section-header">
+        <span class="monospaced-tag">Contact</span>
+        <h2 class="section-title">Direct Connection</h2>
+        <p class="section-desc">Send a direct transmission message to <%= member.name %> regarding collaborations, asset inquiries, or project briefs.</p>
+      </div>
+
+      <div class="contact-section-inner">
+        <!-- Direct Card Subdetails -->
+        <div class="contact-form-panel" style="padding-top: 0;">
+          <div class="form-header">
+            <h3 class="form-title">Direct Dispatch</h3>
+            <p class="form-subtitle">Messages sent from this channel route directly to <%= member.name %>.</p>
+          </div>
+
+          <div class="contact-details-box">
+            <div class="detail-row">
+              <i class="fa-solid fa-envelope"></i>
+              <span><span class="detail-label">Office:</span>skyballstudio@gmail.com</span>
+            </div>
+            <div class="detail-row">
+              <i class="fa-solid fa-phone"></i>
+              <span><span class="detail-label">Direct:</span>+91 94134 17730</span>
+            </div>
+            <div class="detail-row">
+              <i class="fa-solid fa-terminal"></i>
+              <span><span class="detail-label">Location:</span>Jaipur, Rajasthan (303338)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Neon Contact Form -->
+        <div class="contact-form-panel">
+          <form id="skyball-artist-form" autocomplete="off">
+            <!-- Intended Artist Flag (JS captures this dynamically) -->
+            <input type="hidden" id="form-artist-flag" value="<%= member.name %>">
+
+            <div class="form-group">
+              <input type="text" id="form-name" class="form-input" placeholder=" " required>
+              <label for="form-name" class="form-label">Your Name</label>
+            </div>
+            
+            <div class="form-group">
+              <input type="email" id="form-email" class="form-input" placeholder=" " required>
+              <label for="form-email" class="form-label">Email Address</label>
+            </div>
+            
+            <div class="form-group">
+              <textarea id="form-message" class="form-input" placeholder=" " required></textarea>
+              <label for="form-message" class="form-label">Message Details for <%= member.name %></label>
+            </div>
+            
+            <button type="submit" class="form-submit-btn">
+              Send Direct Message
+            </button>
+            
+            <div class="form-status"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span class="copyright">&copy; 2026 Skyball Studio. All rights reserved. Precision-engineered for ultimate playability.</span>
+        <ul class="footer-sublinks">
+          <li><a href="/" class="footer-sublink">Home</a></li>
+          <li><a href="/#projects" class="footer-sublink">Projects</a></li>
+          <li><a href="/#departments" class="footer-sublink">Capabilities</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom JavaScript Interactions -->
+  <script src="/js/main.js"></script>
+
+  <!-- Targeted Artist Form AJAX Handler -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const artistForm = document.getElementById('skyball-artist-form');
+      if (!artistForm) return;
+
+      const statusDiv = artistForm.querySelector('.form-status');
+      const submitBtn = artistForm.querySelector('.form-submit-btn');
+
+      artistForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('form-name').value.trim();
+        const email = document.getElementById('form-email').value.trim();
+        const message = document.getElementById('form-message').value.trim();
+        const intendedArtist = document.getElementById('form-artist-flag').value.trim();
+
+        statusDiv.style.display = 'none';
+        statusDiv.className = 'form-status';
+        statusDiv.textContent = '';
+
+        if (!name || !email || !message) {
+          showStatus('error', 'Please fill in all fields before sending.');
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showStatus('error', 'Please enter a valid email address.');
+          return;
+        }
+
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Sending...</span>`;
+
+        try {
+          const data = await submitSkyballContact({ name, email, message, intendedArtist });
+          showStatus('success', data.message);
+          artistForm.reset();
+        } catch (err) {
+          console.error('Artist form error:', err);
+          showStatus('error', err.message || 'Failed to send message. Please check your network connection.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      });
+
+      function showStatus(type, msg) {
+        statusDiv.style.display = 'block';
+        statusDiv.classList.add(type);
+        statusDiv.textContent = msg;
+        statusDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  </script>
+</body>
+</html>

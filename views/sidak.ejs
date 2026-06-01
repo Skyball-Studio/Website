@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="celeste">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Optimization -->
+  <title>Sidak Sethi | Skyball Studio Premier Audio Engineer & Music Producer</title>
+  <meta name="description" content="Explore the bespoke audio engineering, professional mix & master portfolio, and Spotify-DAW dashboard of Sidak Sethi at Skyball Studio.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/skyball/Skyball/1.png">
+  
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Modern Design System Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    /* Custom Design tokens mapped to Skyball's Celeste Theme System */
+    :root {
+      --spotify-green: var(--theme-glow); /* Dynamic mapping to Celeste Neon Teal */
+      --spotify-green-hover: #5ad2e2;
+      --obsidian-dark: #050508;
+      --obsidian-card: rgba(10, 10, 15, 0.65);
+      --glass-glow: 0 0 25px rgba(var(--theme-glow-rgb), 0.08);
+      --glass-glow-strong: 0 0 35px rgba(var(--theme-glow-rgb), 0.25);
+    }
+
+    body.sidak-body {
+      font-family: var(--font-body) !important;
+      background-color: var(--obsidian-dark) !important;
+      color: var(--text-white) !important;
+      overflow-x: hidden;
+      /* Padding bottom to prevent content clipping under the playbar */
+      padding-bottom: 180px;
+    }
+
+    /* Monospaced text alignment */
+    .monospaced-data {
+      font-family: var(--font-mono) !important;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Vinyl disc CD visualizer style (completely code-based, no images!) */
+    .vinyl-container {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: #020203;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.02);
+      perspective: 1000px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .vinyl-disc {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2a2a2e 0%, #0d0d0f 25%, #050507 45%, #000000 70%, #151518 90%, #000000 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: spin-vinyl 15s linear infinite;
+      animation-play-state: paused;
+      transition: box-shadow 0.5s ease;
+    }
+
+    .vinyl-disc.playing {
+      animation-play-state: running;
+      box-shadow: 0 0 25px rgba(var(--theme-glow-rgb), 0.15);
+    }
+
+    /* Grooves and Shine above the center thumbnail in Z-index */
+    .vinyl-grooves {
+      position: absolute;
+      width: 85%;
+      height: 85%;
+      border-radius: 50%;
+      border: 1px double rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .vinyl-grooves-inner {
+      position: absolute;
+      width: 65%;
+      height: 65%;
+      top: 17.5%;
+      left: 17.5%;
+      border-radius: 50%;
+      border: 1.5px dotted rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .vinyl-shine {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 255, 255, 0.06) 40deg,
+        transparent 80deg,
+        transparent 180deg,
+        transparent 220deg,
+        rgba(255, 255, 255, 0.06) 240deg,
+        transparent 280deg,
+        transparent 360deg
+      );
+      pointer-events: none;
+      z-index: 11;
+    }
+
+    /* YouTube Thumbnail cover disc center */
+    .vinyl-center {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: var(--theme-glow);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+      border: 2px solid #000;
+      transition: background-image 0.5s ease, background-color 0.5s ease;
+    }
+
+    .vinyl-spindle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      border: 1px solid #000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      z-index: 6;
+    }
+
+    @keyframes spin-vinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Spotlight block layout */
+    .now-playing-visual-panel {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    /* Spotify Verified Artist Card */
+    .spotify-profile-card {
+      border: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.015);
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 2.2rem;
+      transition: var(--transition-premium);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .spotify-profile-card:hover {
+      border-color: var(--theme-glow);
+      box-shadow: 0 15px 40px rgba(var(--theme-glow-rgb), 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Clean targeted styling for DAW-track table and rows */
+    .daw-tracklist-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .daw-tracklist-table th,
+    .daw-tracklist-table td {
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .daw-tracklist-table th {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .daw-tracklist-table tr {
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .daw-tracklist-table tr:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .daw-tracklist-table tr.active {
+      background: rgba(var(--theme-glow-rgb), 0.06);
+    }
+
+    .daw-tracklist-table tr.active td {
+      color: var(--theme-glow);
+    }
+
+    .track-row-playing-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.25);
+      position: relative;
+    }
+
+    .daw-tracklist-table tr:hover .track-row-playing-icon i {
+      display: none;
+    }
+    
+    .daw-tracklist-table tr:hover .track-row-play-btn {
+      display: flex !important;
+    }
+
+    .track-row-play-btn {
+      display: none !important;
+      color: var(--theme-glow);
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .track-row-play-btn:hover {
+      transform: scale(1.2);
+    }
+
+    /* Soundwave bars styling in theme colors */
+    .reactive-wave-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 50px;
+      padding: 0 0.5rem;
+    }
+
+    .reactive-bar {
+      width: 4px;
+      height: 5px;
+      background-color: var(--theme-glow);
+      border-radius: 2px;
+      transition: height 0.15s ease;
+    }
+
+    .reactive-wave-container.playing .reactive-bar {
+      animation: pulse-wave-celeste 1.2s ease-in-out infinite alternate;
+    }
+
+    .reactive-wave-container.playing .reactive-bar:nth-child(1) { animation-delay: 0.1s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(2) { animation-delay: 0.3s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(3) { animation-delay: 0.6s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(4) { animation-delay: 0.2s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(5) { animation-delay: 0.8s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(6) { animation-delay: 0.4s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(7) { animation-delay: 0.7s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(8) { animation-delay: 0.5s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(9) { animation-delay: 0.9s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(10) { animation-delay: 0.15s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(11) { animation-delay: 0.35s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(12) { animation-delay: 0.55s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(13) { animation-delay: 0.25s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(14) { animation-delay: 0.75s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(15) { animation-delay: 0.45s; }
+    .reactive-wave-container.playing .reactive-bar:nth-child(16) { animation-delay: 0.12s; }
+
+    @keyframes pulse-wave-celeste {
+      0% { height: 5px; }
+      100% { height: 40px; }
+    }
+
+    /* Glowing hover effects for social and external icons */
+    .daw-yt-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--color-border);
+      color: rgba(255, 255, 255, 0.5);
+      transition: var(--transition-premium);
+    }
+
+    .daw-yt-btn:hover {
+      background: rgba(255, 0, 0, 0.1);
+      border-color: #ff0000;
+      color: #ff0000;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .premium-btn-spotify {
+      background: var(--theme-glow) !important;
+      color: #000 !important;
+      border-color: var(--theme-glow) !important;
+      font-weight: 600;
+    }
+
+    .premium-btn-spotify:hover {
+      background: transparent !important;
+      color: #fff !important;
+      border-color: var(--theme-glow) !important;
+      box-shadow: 0 0 20px rgba(var(--theme-glow-rgb), 0.35);
+    }
+
+    /* Sticky DAW Playbar Footer */
+    .daw-playbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      background-color: rgba(4, 4, 6, 0.85);
+      backdrop-filter: blur(30px) saturate(150%);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 1.1rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .player-core-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .player-btn-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .player-control-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      outline: none;
+    }
+
+    .player-control-btn:hover {
+      color: #fff;
+    }
+
+    .player-control-btn.btn-play-trigger {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .player-control-btn.btn-play-trigger:hover {
+      transform: scale(1.05);
+      background: var(--theme-glow);
+      color: #000;
+      box-shadow: 0 0 15px rgba(var(--theme-glow-rgb), 0.4);
+    }
+
+    .player-timeline-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .player-time-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Subtle Sliders Redesign */
+    .player-slider-input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      padding: 8px 0; /* Expanded hit area vertically */
+      background-clip: content-box; /* Clips gradient to the 3px track */
+      transition: background 0.15s ease;
+    }
+
+    .player-slider-input::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      border-radius: 3px;
+    }
+
+    .player-slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      margin-top: -3.5px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .player-slider-input:hover::-webkit-slider-thumb {
+      opacity: 1;
+      transform: scale(1.3);
+      background: #fff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Firefox Compatibility for Subtle Sliders */
+    .player-slider-input::-moz-range-track {
+      background: transparent;
+      border: none;
+      height: 3px;
+    }
+
+    .player-slider-input::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .player-slider-input:hover::-moz-range-thumb {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* Premium Playback Buttons Micro-animations */
+    .player-control-btn {
+      transition: color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .player-control-btn:hover {
+      transform: translateY(-1px);
+    }
+    .player-control-btn:active {
+      transform: translateY(1px) scale(0.95);
+    }
+
+    /* Breathtaking Ambient Fullscreen Overlay */
+    .daw-fs-player {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #030305;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center; /* Horizontally center all flex children */
+      padding: 3rem 6rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      font-family: var(--font-body);
+    }
+
+    .daw-fs-player.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Ambient Pulsing Glow Blobs */
+    .fs-aura-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .fs-glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(160px);
+      opacity: 0.25;
+      mix-blend-mode: screen;
+      transition: background 0.8s ease;
+      animation: fs-pulse-glow 15s infinite alternate ease-in-out;
+    }
+
+    .fs-glow-blob.blob-1 {
+      width: 600px;
+      height: 600px;
+      top: -10%;
+      left: -10%;
+      background: var(--theme-glow);
+    }
+
+    .fs-glow-blob.blob-2 {
+      width: 600px;
+      height: 600px;
+      bottom: -10%;
+      right: -10%;
+      background: var(--neon-blue);
+      animation-delay: -5s;
+    }
+
+    @keyframes fs-pulse-glow {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(80px, 50px) scale(1.15);
+      }
+      100% {
+        transform: translate(-50px, -80px) scale(0.9);
+      }
+    }
+
+    /* Interactive Fullscreen Record Sleeve Showcase */
+    .fs-showcase-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50vh;
+      perspective: 1500px;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Record sleeve outer framework */
+    .fs-vinyl-sleeve-wrap {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fs-vinyl-sleeve-wrap:hover {
+      transform: rotateY(-15deg) rotateX(10deg);
+    }
+
+    /* Sleeve Card jacket style */
+    .fs-vinyl-jacket {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #0d0d12;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(var(--theme-glow-rgb), 0.1);
+      z-index: 5;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.5s ease;
+    }
+
+    .fs-vinyl-jacket img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: transform 0.5s ease;
+    }
+
+    .fs-vinyl-sleeve-wrap:hover .fs-vinyl-jacket img {
+      transform: scale(1.05);
+    }
+
+    .fs-vinyl-jacket-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(5,5,8,0.9) 0%, rgba(5,5,8,0.1) 100%);
+      pointer-events: none;
+    }
+
+    /* Sleeved Vinyl Disc sliding mechanism */
+    .fs-vinyl-disc-wrap {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 260px;
+      height: 260px;
+      z-index: 2;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .fs-vinyl-disc {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2a2a2e 0%, #0d0d0f 25%, #050507 45%, #000000 70%, #151518 90%, #000000 100%);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Rotate vinyl only when playing */
+    .fs-vinyl-disc.playing {
+      animation: spin-vinyl 15s linear infinite;
+    }
+
+    /* On sleeve hover, the vinyl slides out of its jacket beautifully to the LEFT! */
+    .fs-vinyl-sleeve-wrap:hover .fs-vinyl-disc-wrap {
+      transform: translateX(-140px);
+    }
+
+    .fs-vinyl-center {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      border: 4px solid #111;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+      z-index: 3;
+    }
+
+    .fs-vinyl-center::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #030305;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Glassmorphic Close Button */
+    .fs-close-btn {
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(15px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+    }
+
+    .fs-close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--theme-glow);
+      transform: scale(1.05) rotate(90deg);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Typography & Core fullscreen info */
+    .fs-content-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1.5rem;
+      z-index: 10;
+      margin-top: -2rem;
+    }
+
+    .fs-song-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-body);
+      margin: 0;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .fs-song-artist {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+
+    .fs-timeline-container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .fs-time-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+      min-width: 45px;
+    }
+
+    .fs-controls-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      z-index: 10;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .fs-btn-row {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .fs-play-trigger {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .fs-play-trigger:hover {
+      transform: scale(1.08);
+      background: var(--theme-glow);
+      box-shadow: 0 0 25px rgba(var(--theme-glow-rgb), 0.5);
+    }
+
+    /* Sub-bar with volume and layout status */
+    .fs-bottom-toolbar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 1.5rem;
+    }
+
+    .fs-brand-lbl {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.25);
+      letter-spacing: 0.1em;
+    }
+
+    .fs-volume-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Glassmorphic DAW Panels */
+    .daw-panel {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 3rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Form customization */
+    .sidak-form {
+      border: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.01);
+      border-radius: 4px;
+      padding: 3rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .sidak-form .form-input {
+      border-bottom: 1.5px solid var(--color-border);
+      color: #fff;
+      font-size: 1.05rem;
+      padding: 0.8rem 0;
+    }
+
+    .sidak-form .form-input:focus {
+      border-bottom-color: var(--theme-glow);
+    }
+
+    .sidak-form .form-submit-btn {
+      background: #fff;
+      color: #000;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      font-weight: 500;
+      font-family: var(--font-heading);
+      letter-spacing: 0.08em;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      transition: var(--transition-premium);
+      cursor: pointer;
+    }
+
+    .sidak-form .form-submit-btn:hover {
+      background: transparent;
+      border-color: var(--theme-glow);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(var(--theme-glow-rgb), 0.25);
+    }
+
+    /* Desktop Grid layouts and sticky parameters */
+    .daw-dashboard {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      min-height: 100vh;
+      background-color: var(--obsidian-dark);
+      position: relative;
+      z-index: 5;
+    }
+
+    .daw-sidebar {
+      background-color: #040406;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .daw-main {
+      padding: 4rem 4.5rem 12rem 4.5rem;
+      overflow-y: auto;
+    }
+
+    /* Responsive Overrides */
+    @media (max-width: 1024px) {
+      .daw-dashboard {
+        grid-template-columns: 1fr;
+      }
+      .daw-sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 2.5rem 2rem;
+      }
+      .daw-main {
+        padding: 3rem 2rem 12rem 2rem;
+      }
+      .daw-playbar {
+        padding: 1.5rem 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .now-playing-visual-panel {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .daw-playbar {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+      .daw-playbar-left,
+      .daw-playbar-right {
+        display: none !important;
+      }
+    }
+
+    /* Headless audio tag hide */
+    #daw-headless-audio {
+      display: none;
+    }
+  </style>
+</head>
+<body class="sidak-body">
+
+  <!-- Fine Structural Tech Grid Overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- Shifting Background Aura Glowing Blobs -->
+  <div class="aura-container">
+    <div class="aura-blob aura-1" style="background: var(--theme-glow); filter: blur(200px); opacity: 0.12;"></div>
+    <div class="aura-blob aura-2" style="background: var(--neon-blue); filter: blur(200px); opacity: 0.12;"></div>
+  </div>
+
+  <div class="daw-dashboard">
+    <!-- Left Sidebar Column -->
+    <aside class="daw-sidebar">
+      <div style="display: flex; flex-direction: column; gap: 3.5rem; width: 100%;">
+        <!-- Return Home Link -->
+        <a href="/" class="logo-link" style="gap: 1.2rem; display: flex; align-items: center; text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
+          <i class="fa-solid fa-arrow-left" style="font-size: 1rem; color: var(--text-muted);"></i>
+          <span class="logo-text" style="font-size: 1.2rem; font-weight: 300; font-family: var(--font-body); letter-spacing: 0.05em; text-transform: uppercase;">Return Home</span>
+        </a>
+
+        <!-- Artist Identity Summary -->
+        <div style="display: flex; flex-direction: column; gap: 1rem; border-bottom: 1px solid var(--color-border); padding-bottom: 2.2rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fa-solid fa-circle-check" style="color: #3d91ff; font-size: 1.1rem; filter: drop-shadow(0 0 5px rgba(61,145,255,0.3));"></i>
+            <span class="monospaced-tag" style="color: #fff; font-weight: 600; letter-spacing: 0.1em; font-size: 0.75rem;">Verified Artist</span>
+          </div>
+          <h2 style="font-size: 2.4rem; font-family: var(--font-heading); margin: 0; color: #fff; line-height: 1;"><%= member.name %></h2>
+          <span class="monospaced-tag" style="color: var(--text-muted); font-size: 0.75rem;"><%= member.department %></span>
+        </div>
+
+        <!-- Spotify Verified Profile Link Card -->
+        <div class="spotify-profile-card" style="padding: 1.8rem 1.5rem; gap: 1.2rem; border: none; background: rgba(255,255,255,0.01);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <i class="fa-brands fa-spotify" style="color: var(--theme-glow); font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(var(--theme-glow-rgb), 0.35));"></i>
+            <span class="monospaced-data" style="font-size: 0.65rem; color: var(--theme-glow); border: 1.5px solid var(--theme-glow); border-radius: 4px; padding: 0.2rem 0.6rem; font-weight: bold;">
+              OFFICIAL
+            </span>
+          </div>
+          <div>
+            <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0.5rem 0 0.8rem 0;">
+              Stream Sidak's catalog, singles, and Midnight Confessions EP albums directly on Spotify.
+            </p>
+          </div>
+          <a href="https://open.spotify.com/artist/1uh3UFdF1CEXvzJzXsC6wk" target="_blank" class="premium-btn premium-btn-spotify" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.8rem; font-size: 0.95rem; padding: 0.75rem 1rem; border-radius: 4px; text-decoration: none;">
+            <i class="fa-brands fa-spotify"></i> Follow on Spotify
+          </a>
+        </div>
+      </div>
+
+      <div style="width: 100%; border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+        <span class="monospaced-data" style="font-size: 0.7rem; color: var(--text-muted);">&copy; 2026 Skyball Studio</span>
+      </div>
+    </aside>
+
+    <!-- Right Main Panel Column -->
+    <main class="daw-main">
+      <!-- Biography Segment -->
+      <section style="margin-bottom: 5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 4rem;">
+        <h1 style="font-size: 6.5rem; font-family: var(--font-heading); line-height: 0.9; letter-spacing: 0.02em; margin: 0; color: #fff;"><%= member.name %></h1>
+        <p style="font-size: 1.25rem; line-height: 1.8; color: var(--text-silver); margin-top: 2rem; max-width: 820px; font-weight: 300; margin-bottom: 0;">
+          <%= member.bio %>
+        </p>
+      </section>
+
+      <!-- Workstation Panel -->
+      <section style="display: flex; flex-direction: column; gap: 4rem; margin-bottom: 6rem;">
+        <!-- Spotlight Panel -->
+        <div class="daw-panel" id="session-spotlight-panel" style="background: rgba(255, 255, 255, 0.015); border: 1px solid var(--color-border); transition: background 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;">
+          <span class="monospaced-tag" style="display: block; margin-bottom: 1.8rem; font-size: 0.75rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.8rem;">
+            <i class="fa-solid fa-circle" style="color: var(--theme-glow); font-size: 0.5rem; margin-right: 8px; vertical-align: middle; animation: blink-led 1s infinite alternate;"></i> 
+            Studio Session Spotlight // Active Track Monitors
+          </span>
+
+          <div class="now-playing-visual-panel">
+            <!-- Pure CSS Rotating Vinyl CD Turntable with dynamic cover overlay -->
+            <div class="vinyl-container">
+              <div class="vinyl-disc" id="studio-vinyl-disc">
+                <!-- YouTube Thumbnail Sticker -->
+                <div class="vinyl-center" id="vinyl-center-sticker">
+                  <div class="vinyl-spindle"></div>
+                </div>
+                <!-- Overlays for grooves & glare -->
+                <div class="vinyl-grooves"></div>
+                <div class="vinyl-grooves-inner"></div>
+                <div class="vinyl-shine"></div>
+              </div>
+            </div>
+
+            <!-- Metadata & Soundwave visualizer -->
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
+              <div>
+                <span class="monospaced-data" id="spotlight-production-role" style="font-size: 0.8rem; color: var(--theme-glow); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-mono);">
+                  CO-ARTIST, PRODUCED, MIXED & MASTERED
+                </span>
+                <h2 id="spotlight-track-title" style="font-size: 2.6rem; font-weight: 700; margin: 0.2rem 0; color: #fff; font-family: var(--font-body); letter-spacing: -0.02em;">
+                  Under Pressure
+                </h2>
+                <span id="spotlight-track-artist" style="font-size: 1.15rem; color: rgba(255,255,255,0.55); font-weight: 300;">
+                  Sidak x Tejas VLV
+                </span>
+              </div>
+
+              <!-- 16-bar dynamic visualizer -->
+              <div style="display: flex; align-items: center; gap: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--color-border); border-radius: 4px; padding: 0.8rem 1.2rem; max-width: 480px;">
+                <span class="monospaced-data" style="font-size: 0.75rem; color: rgba(255,255,255,0.3); font-family: var(--font-mono);">VU</span>
+                <div class="reactive-wave-container" id="spotlight-visualizer">
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                  <div class="reactive-bar"></div>
+                </div>
+                <div style="margin-left: auto; text-align: right;">
+                  <span class="monospaced-data" style="font-size: 0.65rem; color: var(--theme-glow); font-weight: 600; display: block; font-family: var(--font-mono);">MONITOR FEED</span>
+                  <span class="monospaced-data" style="font-size: 0.6rem; color: rgba(255,255,255,0.25); display: block; font-family: var(--font-mono);">48.0 KHZ STEREO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playlist Panel -->
+        <div class="daw-panel">
+          <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--color-border); padding-bottom: 1.2rem;">
+            <div>
+              <span class="monospaced-tag" style="font-size: 0.75rem;">01 // LOSSLESS MASTER STEMS</span>
+              <h3 style="font-size: 1.8rem; font-weight: 700; margin: 0.3rem 0 0 0; color: #fff; font-family: var(--font-body);">Studio Client Playlist</h3>
+            </div>
+            <span class="monospaced-data" style="font-size: 0.8rem; color: rgba(255,255,255,0.3); font-family: var(--font-mono);">
+              <%= member.tracks.length %> Tracks Loaded // 24-Bit Linear PCM
+            </span>
+          </div>
+
+          <div style="overflow-x: auto; width: 100%;">
+             <table class="daw-tracklist-table">
+               <thead>
+                 <tr>
+                   <th style="width: 50px; text-align: center;">#</th>
+                   <th>Track Details</th>
+                   <th>Production Credits</th>
+                   <th style="width: 120px; text-align: center;">Stream Video</th>
+                 </tr>
+               </thead>
+               <tbody id="tracklist-rows-body">
+                 <% member.tracks.forEach(function(track, idx) { %>
+                   <tr class="tracklist-row" data-index="<%= idx %>">
+                     <td style="text-align: center;">
+                       <div class="track-row-playing-icon">
+                         <span class="row-num-lbl"><%= idx + 1 %></span>
+                         <div class="track-row-play-btn"><i class="fa-solid fa-play"></i></div>
+                       </div>
+                     </td>
+                     <td>
+                       <div style="font-weight: 600; color: #fff; font-size: 1.05rem;"><%= track.title %></div>
+                       <div style="font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem;"><%= track.artist %></div>
+                     </td>
+                     <td>
+                       <span class="monospaced-data" style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); padding: 0.3rem 0.6rem; border-radius: 4px; font-family: var(--font-mono);">
+                         <%= track.role %>
+                       </span>
+                     </td>
+                     <td style="text-align: center;">
+                       <a href="<%= track.youtube %>" target="_blank" class="daw-yt-btn" title="Watch Original Music Video on YouTube" onclick="event.stopPropagation();">
+                         <i class="fa-brands fa-youtube"></i>
+                       </a>
+                     </td>
+                   </tr>
+                 <% }); %>
+               </tbody>
+             </table>
+           </div>
+        </div>
+      </section>
+
+      <!-- Order Form Section -->
+      <section id="mix-order-form" style="margin-bottom: 6rem; border-top: 1px solid var(--color-border); padding-top: 5rem;">
+        <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 5rem;">
+          <div>
+            <span class="monospaced-tag">// DIRECT CONTEXT DISPATCH</span>
+            <h2 style="font-size: 3.5rem; font-weight: 700; margin: 1rem 0; color: #fff; font-family: var(--font-body); line-height: 1.1;">
+              Mix & Master Orders
+            </h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-silver); margin-top: 1.5rem; font-weight: 300;">
+              Transmit your multitracks, rough demo mixes, and engineering parameters directly to Sidak. Direct submissions route instantly to his console pipeline for prompt appraisal and booking details.
+            </p>
+            
+            <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem;">
+              <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.95rem; color: rgba(255,255,255,0.7);">
+                <i class="fa-solid fa-envelope" style="color: var(--theme-glow); width: 20px;"></i>
+                <span>sidaksethi@skyballstudio.com</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.95rem; color: rgba(255,255,255,0.7);">
+                <i class="fa-solid fa-terminal" style="color: var(--theme-glow); width: 20px;"></i>
+                <span>Intended Target: Sidak Sethi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Functional Form -->
+          <div class="sidak-form">
+            <form id="skyball-artist-form" autocomplete="off">
+              <!-- Direct Dispatch Flag -->
+              <input type="hidden" id="form-artist-flag" value="Sidak Sethi">
+
+              <div class="form-group" style="margin-bottom: 2.5rem;">
+                <input type="text" id="form-name" class="form-input" placeholder=" " required style="background:transparent;">
+                <label for="form-name" class="form-label" style="color: rgba(255,255,255,0.45); font-size: 0.9rem;">Client Full Name</label>
+              </div>
+              
+              <div class="form-group" style="margin-bottom: 2.5rem;">
+                <input type="email" id="form-email" class="form-input" placeholder=" " required style="background:transparent;">
+                <label for="form-email" class="form-label" style="color: rgba(255,255,255,0.45); font-size: 0.9rem;">Email Address</label>
+              </div>
+              
+              <div class="form-group" style="margin-bottom: 3rem;">
+                <textarea id="form-message" class="form-input" placeholder=" " required style="min-height: 120px; background:transparent;"></textarea>
+                <label for="form-message" class="form-label" style="color: rgba(255,255,255,0.45); font-size: 0.9rem;">Project Details / BPM / Target References</label>
+              </div>
+              
+              <button type="submit" class="form-submit-btn" style="width: 100%; padding: 1.2rem 2rem;">
+                Send Project Parameters
+              </button>
+              
+              <div class="form-status" style="margin-top: 1.5rem; display: none;"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Links -->
+      <footer style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--color-border); padding-top: 3rem; margin-bottom: 4rem;">
+        <span style="color: var(--text-muted); font-size: 0.85rem;">&copy; 2026 Skyball Studio. Designed and engineered for ultimate playability.</span>
+        <ul style="margin: 0; display:flex; gap:2rem; list-style:none; padding: 0;">
+          <li><a href="/" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">Home</a></li>
+          <li><a href="/#projects" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">Projects</a></li>
+          <li><a href="/#departments" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">Capabilities</a></li>
+        </ul>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Headless audio element -->
+  <audio id="daw-headless-audio" preload="auto"></audio>
+
+  <!-- ==========================================================================
+       STICKY DAW PLAYBAR ENGINE (FOOTER PLAYER)
+       ========================================================================== -->
+  <footer class="daw-playbar">
+    <!-- Playbar Left Panel: Active Song Info -->
+    <div style="display: flex; align-items: center; gap: 1.2rem;" class="daw-playbar-left">
+      <div style="width: 48px; height: 48px; border-radius: 4px; background: #121214; border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); overflow:hidden;">
+        <img src="" id="playbar-track-cover" style="width:100%; height:100%; object-fit:cover; display:none;">
+        <i class="fa-solid fa-music" style="color: var(--theme-glow); font-size: 1.1rem;" id="playbar-art-icon"></i>
+      </div>
+      <div>
+        <div id="playbar-track-title" style="font-weight: 600; color: #fff; font-size: 0.95rem; line-height: 1.2; font-family: var(--font-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
+          Under Pressure
+        </div>
+        <div id="playbar-track-artist" style="font-size: 0.8rem; color: rgba(255,255,255,0.45); font-family: var(--font-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin-top: 0.1rem;">
+          Sidak x Tejas VLV
+        </div>
+      </div>
+      <!-- Watch video icon -->
+      <a href="#" target="_blank" id="playbar-track-youtube" class="daw-yt-btn" style="width: 28px; height: 28px; font-size: 0.8rem; margin-left: 0.5rem;" title="Watch Video">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+
+    <!-- Playbar Center Panel: Core controls & Scrubber -->
+    <div class="player-core-controls">
+      <div class="player-btn-row">
+        <!-- Shuffle Button Container (with dynamic active dot) -->
+        <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
+          <button class="player-control-btn" id="player-btn-shuffle" title="Toggle Shuffle">
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <div id="shuffle-dot" style="width: 4px; height: 4px; border-radius: 50%; background-color: var(--theme-glow); margin-top: 4px; opacity: 0; transition: opacity 0.2s; box-shadow: 0 0 6px var(--theme-glow);"></div>
+        </div>
+
+        <!-- Previous track Button -->
+        <button class="player-control-btn" id="player-btn-prev" title="Previous Song">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+
+        <!-- Master Trigger Play/Pause Button -->
+        <button class="player-control-btn btn-play-trigger" id="player-btn-play" title="Play / Pause">
+          <i class="fa-solid fa-play" id="play-btn-icon"></i>
+        </button>
+
+        <!-- Next track Button -->
+        <button class="player-control-btn" id="player-btn-next" title="Next Song">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+
+        <!-- Loop Button Container (with dynamic active dot & "1" badge) -->
+        <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
+          <button class="player-control-btn" id="player-btn-loop" title="Toggle Repeat Mode" style="position:relative;">
+            <i class="fa-solid fa-repeat"></i>
+            <span id="loop-one-badge" style="display: none; font-size: 0.55rem; font-weight: 900; position: absolute; top: -6px; right: -6px; background: var(--theme-glow); color: #000; border-radius: 50%; width: 12px; height: 12px; align-items: center; justify-content: center; font-family: var(--font-mono); line-height: 1;">1</span>
+          </button>
+          <div id="loop-dot" style="width: 4px; height: 4px; border-radius: 50%; background-color: var(--theme-glow); margin-top: 4px; opacity: 0; transition: opacity 0.2s; box-shadow: 0 0 6px var(--theme-glow);"></div>
+        </div>
+      </div>
+
+      <!-- Scrubber Timeline -->
+      <div class="player-timeline-wrapper">
+        <span class="player-time-lbl monospaced-data" id="player-time-current">0:00</span>
+        <input type="range" class="player-slider-input" id="progress-slider" min="0" max="100" value="0">
+        <span class="player-time-lbl monospaced-data" id="player-time-duration">0:00</span>
+      </div>
+    </div>
+
+    <!-- Playbar Right Panel: Volume Scrubber & Fullscreen Toggle -->
+    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 1rem;" class="daw-playbar-right">
+      <button class="player-control-btn" id="volume-mute-btn" title="Mute Volume" style="color: rgba(255,255,255,0.45);">
+        <i class="fa-solid fa-volume-high" id="volume-icon-status"></i>
+      </button>
+      <input type="range" class="player-slider-input" id="volume-slider" min="0" max="100" value="80" style="max-width: 90px;">
+      <span class="player-time-lbl monospaced-data" id="volume-lbl" style="width: 32px; text-align: right;">80%</span>
+      <button class="player-control-btn" id="fullscreen-mode-btn" title="Enter Ambient Fullscreen" style="color: rgba(255,255,255,0.45); margin-left: 0.5rem;">
+        <i class="fa-solid fa-expand"></i>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       BREATHTAKING AMBIENT FULLSCREEN PLAYER OVERLAY
+       ========================================================================= -->
+  <div id="daw-fullscreen-player" class="daw-fs-player">
+    <!-- Dynamic Slow Pulsing Glow Backdrops -->
+    <div class="fs-aura-container">
+      <div class="fs-glow-blob blob-1"></div>
+      <div class="fs-glow-blob blob-2"></div>
+    </div>
+
+    <!-- Glassmorphic Escape Close Button -->
+    <button id="fs-close-btn" class="fs-close-btn" title="Exit Fullscreen (Esc)">
+      <i class="fa-solid fa-compress"></i>
+    </button>
+
+    <!-- Top header subtle status -->
+    <div style="display: flex; justify-content: space-between; align-items: center; z-index: 10; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <img src="/assets/skyball/Skyball/1.png" style="height: 24px; width: auto;" alt="Skyball">
+        <span class="monospaced-data" style="font-size: 0.75rem; color: rgba(255,255,255,0.3); font-weight: 700;">Skyball Studio</span>
+      </div>
+    </div>
+
+    <!-- Centerpiece Showcase: Vinyl Sleeve and sliding Disc -->
+    <div class="fs-showcase-container">
+      <div class="fs-vinyl-sleeve-wrap">
+        <!-- Vinyl Record Sleeve Jacket Cover -->
+        <div class="fs-vinyl-jacket">
+          <img id="fs-jacket-image" src="/assets/skyball/Skyball/1.png" alt="Track Sleeve Art">
+          <div class="fs-vinyl-jacket-overlay"></div>
+        </div>
+        <!-- Heavy Vinyl Disc (slides out on sleeve hover) -->
+        <div id="fs-vinyl-disc-wrap" class="fs-vinyl-disc-wrap">
+          <div id="fs-vinyl-disc" class="fs-vinyl-disc">
+            <div id="fs-vinyl-center-sticker" class="fs-vinyl-center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle section: Metadata & Timeline Scrubber -->
+    <div class="fs-content-wrap">
+      <h2 id="fs-track-title" class="fs-song-title">Under Pressure</h2>
+      <p id="fs-track-artist" class="fs-song-artist">Sidak Sethi x Tejas VLV</p>
+
+      <!-- Fullscreen Timeline Scroller -->
+      <div class="fs-timeline-container">
+        <span class="fs-time-lbl monospaced-data" id="fs-time-current">0:00</span>
+        <input type="range" class="player-slider-input" id="fs-progress-slider" min="0" max="100" value="0">
+        <span class="fs-time-lbl monospaced-data" id="fs-time-duration">0:00</span>
+      </div>
+    </div>
+
+    <!-- Bottom Controls & Volume bar -->
+    <div class="fs-controls-container">
+      <div class="fs-btn-row">
+        <!-- Shuffle -->
+        <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
+          <button class="player-control-btn" id="fs-btn-shuffle" title="Toggle Shuffle" style="font-size: 1.2rem; color: rgba(255,255,255,0.4);">
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <div id="fs-shuffle-dot" style="width: 4px; height: 4px; border-radius: 50%; background-color: var(--theme-glow); margin-top: 4px; opacity: 0; transition: opacity 0.2s; box-shadow: 0 0 6px var(--theme-glow);"></div>
+        </div>
+
+        <!-- Previous -->
+        <button class="player-control-btn" id="fs-btn-prev" title="Previous Song" style="font-size: 1.4rem; color: rgba(255,255,255,0.75);">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+
+        <!-- Master Play Button -->
+        <button class="fs-play-trigger" id="fs-btn-play" title="Play / Pause">
+          <i class="fa-solid fa-play" id="fs-play-icon"></i>
+        </button>
+
+        <!-- Next -->
+        <button class="player-control-btn" id="fs-btn-next" title="Next Song" style="font-size: 1.4rem; color: rgba(255,255,255,0.75);">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+
+        <!-- Loop -->
+        <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
+          <button class="player-control-btn" id="fs-btn-loop" title="Toggle Repeat Mode" style="font-size: 1.2rem; color: rgba(255,255,255,0.4); position:relative;">
+            <i class="fa-solid fa-repeat"></i>
+            <span id="fs-loop-one-badge" style="display: none; font-size: 0.55rem; font-weight: 900; position: absolute; top: -6px; right: -6px; background: var(--theme-glow); color: #000; border-radius: 50%; width: 12px; height: 12px; align-items: center; justify-content: center; font-family: var(--font-mono); line-height: 1;">1</span>
+          </button>
+          <div id="fs-loop-dot" style="width: 4px; height: 4px; border-radius: 50%; background-color: var(--theme-glow); margin-top: 4px; opacity: 0; transition: opacity 0.2s; box-shadow: 0 0 6px var(--theme-glow);"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Status & Volume Controller -->
+      <div class="fs-bottom-toolbar">
+        <div></div>
+
+        <div class="fs-volume-wrap">
+          <button class="player-control-btn" title="Mute Volume" style="color: rgba(255,255,255,0.45); font-size: 0.95rem;">
+            <i class="fa-solid fa-volume-high" id="fs-volume-icon-status"></i>
+          </button>
+          <input type="range" class="player-slider-input" id="fs-volume-slider" min="0" max="100" value="80" style="max-width: 120px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Audio Engine Scripts -->
+  <script>
+    // 1. Audio and Playlist Setup
+    // Inject tracks metadata safely from EJS backend
+    const tracks = <%- JSON.stringify(member.tracks) %>;
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let isShuffled = false;
+    let repeatState = 0; // 0 = repeat off, 1 = repeat playlist, 2 = repeat track
+    let originalVolume = 0.8;
+
+    const audio = document.getElementById('daw-headless-audio');
+    
+    // Custom track glow backdrops mapped to Celeste dynamic styling language
+    const trackGlowColors = [
+      'rgba(239, 68, 68, 0.16)',   // Mai Tere Peeche - Red
+      'rgba(79, 70, 229, 0.16)',   // Tum Aao - Twilight Indigo
+      'rgba(236, 72, 153, 0.16)',  // Me and You - Fuchsia/Pink
+      'rgba(245, 158, 11, 0.16)',  // Mere Saajna - Sunset Amber
+      'rgba(16, 185, 129, 0.16)',  // Mera Desh Bimar - Emerald Green
+      'rgba(6, 182, 212, 0.16)'    // Under Pressure - Celeste Cyan
+    ];
+    
+    // UI Selectors
+    const playBtn = document.getElementById('player-btn-play');
+    const playBtnIcon = document.getElementById('play-btn-icon');
+    const prevBtn = document.getElementById('player-btn-prev');
+    const nextBtn = document.getElementById('player-btn-next');
+    const loopBtn = document.getElementById('player-btn-loop');
+    const shuffleBtn = document.getElementById('player-btn-shuffle');
+    const shuffleDot = document.getElementById('shuffle-dot');
+    const loopDot = document.getElementById('loop-dot');
+    const loopOneBadge = document.getElementById('loop-one-badge');
+    
+    const progressSlider = document.getElementById('progress-slider');
+    const progressTimeCurrent = document.getElementById('player-time-current');
+    const progressTimeDuration = document.getElementById('player-time-duration');
+    
+    const volumeMuteBtn = document.getElementById('volume-mute-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeLbl = document.getElementById('volume-lbl');
+    const volumeIconStatus = document.getElementById('volume-icon-status');
+
+    // Spotlight Selectors
+    const sessionSpotlightPanel = document.getElementById('session-spotlight-panel');
+    const spotlightTitle = document.getElementById('spotlight-track-title');
+    const spotlightArtist = document.getElementById('spotlight-track-artist');
+    const spotlightRole = document.getElementById('spotlight-production-role');
+    const spotlightVisualizer = document.getElementById('spotlight-visualizer');
+    const studioVinylDisc = document.getElementById('studio-vinyl-disc');
+    const vinylSticker = document.getElementById('vinyl-center-sticker');
+
+    // Playbar Selectors
+    const playbarTitle = document.getElementById('playbar-track-title');
+    const playbarArtist = document.getElementById('playbar-track-artist');
+    const playbarYoutube = document.getElementById('playbar-track-youtube');
+    const playbarArtIcon = document.getElementById('playbar-art-icon');
+    const playbarTrackCover = document.getElementById('playbar-track-cover');
+    const tracklistRows = document.querySelectorAll('.tracklist-row');
+
+    // Ambient Fullscreen Mode Selectors
+    const fsPlayer = document.getElementById('daw-fullscreen-player');
+    const fsCloseBtn = document.getElementById('fs-close-btn');
+    const fsOpenBtn = document.getElementById('fullscreen-mode-btn');
+    
+    const fsTitle = document.getElementById('fs-track-title');
+    const fsArtist = document.getElementById('fs-track-artist');
+    const fsJacketImg = document.getElementById('fs-jacket-image');
+    const fsVinylDisc = document.getElementById('fs-vinyl-disc');
+    const fsVinylCenter = document.getElementById('fs-vinyl-center-sticker');
+    
+    const fsProgressSlider = document.getElementById('fs-progress-slider');
+    const fsTimeCurrent = document.getElementById('fs-time-current');
+    const fsTimeDuration = document.getElementById('fs-time-duration');
+    
+    const fsPlayBtn = document.getElementById('fs-btn-play');
+    const fsPlayBtnIcon = document.getElementById('fs-play-icon');
+    const fsPrevBtn = document.getElementById('fs-btn-prev');
+    const fsNextBtn = document.getElementById('fs-btn-next');
+    const fsShuffleBtn = document.getElementById('fs-btn-shuffle');
+    const fsShuffleDot = document.getElementById('fs-shuffle-dot');
+    const fsLoopBtn = document.getElementById('fs-btn-loop');
+    const fsLoopDot = document.getElementById('fs-loop-dot');
+    const fsLoopOneBadge = document.getElementById('fs-loop-one-badge');
+    
+    const fsVolumeSlider = document.getElementById('fs-volume-slider');
+    const fsVolumeIconStatus = document.getElementById('fs-volume-icon-status');
+
+    // Initialize Audio state
+    audio.volume = originalVolume;
+
+    // Dynamic active color slider background helper (Celeste / Teal progress fill)
+    function updateSliderBackground(slider) {
+      const min = parseFloat(slider.min) || 0;
+      const max = parseFloat(slider.max) || 100;
+      const val = parseFloat(slider.value) || 0;
+      const percent = ((val - min) / (max - min)) * 100;
+      slider.style.background = `linear-gradient(to right, var(--theme-glow) 0%, var(--theme-glow) ${percent}%, rgba(255, 255, 255, 0.08) ${percent}%, rgba(255, 255, 255, 0.08) 100%)`;
+    }
+
+    // Helper to format track durations beautifully
+    function formatTime(secs) {
+      if (isNaN(secs)) return '0:00';
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    // Helper to extract YouTube video ID dynamically
+    function getYoutubeId(url) {
+      if (!url) return '';
+      let id = '';
+      if (url.includes('youtube.com/watch')) {
+        const urlParams = new URLSearchParams(url.split('?')[1]);
+        id = urlParams.get('v');
+      } else if (url.includes('youtu.be/')) {
+        id = url.split('youtu.be/')[1].split('?')[0];
+      }
+      return id;
+    }
+
+    // Load dynamic song by index
+    function loadTrack(index) {
+      if (index < 0 || index >= tracks.length) return;
+      currentTrackIndex = index;
+      const track = tracks[index];
+
+      // Dynamic path encoding to properly resolve filenames with special characters
+      const encodedFilename = encodeURIComponent(track.filename);
+      audio.src = `/assets/sidak/${encodedFilename}`;
+      audio.load();
+
+      // Extract Youtube ID & Load dynamic thumbnails
+      const ytId = getYoutubeId(track.youtube);
+      let thumbUrl = '';
+      if (ytId) {
+        thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        
+        // Dynamic image updates
+        vinylSticker.style.backgroundImage = `url('${thumbUrl}')`;
+        vinylSticker.style.backgroundColor = 'transparent';
+        
+        playbarTrackCover.src = thumbUrl;
+        playbarTrackCover.style.display = 'block';
+        playbarArtIcon.style.display = 'none';
+
+        // Fullscreen Cover updates
+        fsJacketImg.src = thumbUrl;
+        fsVinylCenter.style.backgroundImage = `url('${thumbUrl}')`;
+      } else {
+        vinylSticker.style.backgroundImage = 'none';
+        vinylSticker.style.backgroundColor = 'var(--theme-glow)';
+        
+        playbarTrackCover.style.display = 'none';
+        playbarArtIcon.style.display = 'block';
+
+        // Fullscreen Fallback
+        fsJacketImg.src = '/assets/skyball/Skyball/1.png';
+        fsVinylCenter.style.backgroundImage = 'none';
+        fsVinylCenter.style.backgroundColor = 'var(--theme-glow)';
+      }
+
+      // Dynamic Color Theme Swapping: Apply track's glow color backdrop
+      const glowColor = trackGlowColors[index] || 'rgba(var(--theme-glow-rgb), 0.16)';
+      const activeColorSolid = glowColor.replace('0.16', '0.45');
+      const lightShadowColor = glowColor.replace('0.16', '0.06');
+
+      sessionSpotlightPanel.style.background = `radial-gradient(circle at top left, ${glowColor} 0%, rgba(10, 10, 15, 0.6) 80%)`;
+      sessionSpotlightPanel.style.borderColor = activeColorSolid;
+      sessionSpotlightPanel.style.boxShadow = `0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px ${lightShadowColor}`;
+
+      // Update Fullscreen ambient glow parameters dynamically!
+      const match = glowColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (match) {
+        const rgbStr = `${match[1]}, ${match[2]}, ${match[3]}`;
+        fsPlayer.style.setProperty('--theme-glow-rgb', rgbStr);
+        fsPlayer.style.setProperty('--theme-glow', `rgba(${rgbStr}, 1)`);
+      }
+
+      // Update Spotlight Screen metadata
+      spotlightTitle.textContent = track.title;
+      spotlightArtist.textContent = track.artist;
+      spotlightRole.textContent = track.role;
+
+      // Update Bottom Playbar Screen metadata
+      playbarTitle.textContent = track.title;
+      playbarArtist.textContent = track.artist;
+      playbarYoutube.href = track.youtube;
+
+      // Update Fullscreen Metadata
+      fsTitle.textContent = track.title;
+      fsArtist.textContent = track.artist;
+
+      // Update Tracklist active highlight rows
+      tracklistRows.forEach(row => {
+        const rowIdx = parseInt(row.getAttribute('data-index'), 10);
+        if (rowIdx === currentTrackIndex) {
+          row.classList.add('active');
+          const rowNumLbl = row.querySelector('.row-num-lbl');
+          const rowPlayBtn = row.querySelector('.track-row-play-btn');
+          
+          if (isPlaying) {
+            rowNumLbl.innerHTML = '<i class="fa-solid fa-chart-simple" style="animation: pulse-wave-celeste 1s infinite alternate; color: var(--theme-glow);"></i>';
+            rowPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+          } else {
+            rowNumLbl.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            rowPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+          }
+        } else {
+          row.classList.remove('active');
+          row.querySelector('.row-num-lbl').textContent = rowIdx + 1;
+          row.querySelector('.track-row-play-btn').innerHTML = '<i class="fa-solid fa-play"></i>';
+        }
+      });
+    }
+
+    // Trigger Play Action
+    function playTrack() {
+      isPlaying = true;
+      audio.play().then(() => {
+        playBtnIcon.className = 'fa-solid fa-pause';
+        fsPlayBtnIcon.className = 'fa-solid fa-pause';
+        spotlightVisualizer.classList.add('playing');
+        studioVinylDisc.classList.add('playing');
+        fsVinylDisc.classList.add('playing');
+        
+        if (playbarTrackCover.style.display !== 'block') {
+          playbarArtIcon.className = 'fa-solid fa-compact-disc fa-spin';
+        }
+        
+        // Update active row visual indicators
+        const activeRow = document.querySelector('.tracklist-row.active');
+        if (activeRow) {
+          const rowNumLbl = activeRow.querySelector('.row-num-lbl');
+          const rowPlayBtn = activeRow.querySelector('.track-row-play-btn');
+          rowNumLbl.innerHTML = '<i class="fa-solid fa-chart-simple" style="color: var(--theme-glow);"></i>';
+          rowPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        }
+      }).catch(err => {
+        console.warn("Autoplay block / playback error: ", err);
+        isPlaying = false;
+      });
+    }
+
+    // Trigger Pause Action
+    function pauseTrack() {
+      isPlaying = false;
+      audio.pause();
+      playBtnIcon.className = 'fa-solid fa-play';
+      fsPlayBtnIcon.className = 'fa-solid fa-play';
+      spotlightVisualizer.classList.remove('playing');
+      studioVinylDisc.classList.remove('playing');
+      fsVinylDisc.classList.remove('playing');
+      
+      if (playbarTrackCover.style.display !== 'block') {
+        playbarArtIcon.className = 'fa-solid fa-music';
+      }
+
+      const activeRow = document.querySelector('.tracklist-row.active');
+      if (activeRow) {
+        const rowNumLbl = activeRow.querySelector('.row-num-lbl');
+        const rowPlayBtn = activeRow.querySelector('.track-row-play-btn');
+        rowNumLbl.innerHTML = '<i class="fa-solid fa-volume-high" style="color: var(--theme-glow);"></i>';
+        rowPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+      }
+    }
+
+    // Play/Pause Master Switch
+    function togglePlay() {
+      if (isPlaying) {
+        pauseTrack();
+      } else {
+        playTrack();
+      }
+    }
+
+    // Playlist Item Row Triggers
+    tracklistRows.forEach(row => {
+      row.addEventListener('click', () => {
+        const idx = parseInt(row.getAttribute('data-index'), 10);
+        if (idx === currentTrackIndex) {
+          togglePlay();
+        } else {
+          loadTrack(idx);
+          playTrack();
+        }
+      });
+    });
+
+    // Play Next track (Spotify-style Shuffle integrated)
+    function playNextTrack() {
+      if (isShuffled) {
+        let nextIdx = currentTrackIndex;
+        if (tracks.length > 1) {
+          while (nextIdx === currentTrackIndex) {
+            nextIdx = Math.floor(Math.random() * tracks.length);
+          }
+        } else {
+          nextIdx = 0;
+        }
+        loadTrack(nextIdx);
+        playTrack();
+      } else {
+        let nextIdx = currentTrackIndex + 1;
+        if (nextIdx >= tracks.length) {
+          if (repeatState === 1) {
+            nextIdx = 0; // Wrap around if Repeat All is active
+          } else {
+            // Repeat Off: Stop at playlist boundary
+            nextIdx = 0;
+            loadTrack(nextIdx);
+            pauseTrack();
+            return;
+          }
+        }
+        loadTrack(nextIdx);
+        playTrack();
+      }
+    }
+
+    // Play Previous track (Spotify-style Shuffle integrated)
+    function playPrevTrack() {
+      if (isShuffled) {
+        let prevIdx = currentTrackIndex;
+        if (tracks.length > 1) {
+          while (prevIdx === currentTrackIndex) {
+            prevIdx = Math.floor(Math.random() * tracks.length);
+          }
+        } else {
+          prevIdx = 0;
+        }
+        loadTrack(prevIdx);
+        playTrack();
+      } else {
+        let prevIdx = currentTrackIndex - 1;
+        if (prevIdx < 0) {
+          if (repeatState === 1) {
+            prevIdx = tracks.length - 1; // Wrap around to end
+          } else {
+            prevIdx = 0;
+          }
+        }
+        loadTrack(prevIdx);
+        playTrack();
+      }
+    }
+
+    // Previous Song click
+    prevBtn.addEventListener('click', playPrevTrack);
+    fsPrevBtn.addEventListener('click', playPrevTrack);
+
+    // Next Song click
+    nextBtn.addEventListener('click', playNextTrack);
+    fsNextBtn.addEventListener('click', playNextTrack);
+
+    // Play / Pause Master button click
+    playBtn.addEventListener('click', togglePlay);
+    fsPlayBtn.addEventListener('click', togglePlay);
+
+    // Spotify Shuffle Toggle
+    shuffleBtn.addEventListener('click', toggleShuffle);
+    fsShuffleBtn.addEventListener('click', toggleShuffle);
+
+    function toggleShuffle() {
+      isShuffled = !isShuffled;
+      updateShuffleUI();
+    }
+
+    function updateShuffleUI() {
+      if (isShuffled) {
+        shuffleBtn.style.color = 'var(--theme-glow)';
+        shuffleDot.style.opacity = '1';
+        fsShuffleBtn.style.color = 'var(--theme-glow)';
+        fsShuffleDot.style.opacity = '1';
+      } else {
+        shuffleBtn.style.color = 'var(--text-muted)';
+        shuffleDot.style.opacity = '0';
+        fsShuffleBtn.style.color = 'rgba(255, 255, 255, 0.4)';
+        fsShuffleDot.style.opacity = '0';
+      }
+    }
+
+    // Spotify Loop (3-State Repeat Cycle Toggle)
+    loopBtn.addEventListener('click', toggleLoop);
+    fsLoopBtn.addEventListener('click', toggleLoop);
+
+    function toggleLoop() {
+      repeatState = (repeatState + 1) % 3;
+      updateLoopUI();
+    }
+
+    function updateLoopUI() {
+      if (repeatState === 0) {
+        // Loop Off
+        loopBtn.style.color = 'var(--text-muted)';
+        loopDot.style.opacity = '0';
+        loopOneBadge.style.display = 'none';
+
+        fsLoopBtn.style.color = 'rgba(255, 255, 255, 0.4)';
+        fsLoopDot.style.opacity = '0';
+        fsLoopOneBadge.style.display = 'none';
+      } else if (repeatState === 1) {
+        // Repeat Playlist
+        loopBtn.style.color = 'var(--theme-glow)';
+        loopDot.style.opacity = '1';
+        loopOneBadge.style.display = 'none';
+
+        fsLoopBtn.style.color = 'var(--theme-glow)';
+        fsLoopDot.style.opacity = '1';
+        fsLoopOneBadge.style.display = 'none';
+      } else if (repeatState === 2) {
+        // Repeat Single Song
+        loopBtn.style.color = 'var(--theme-glow)';
+        loopDot.style.opacity = '1';
+        loopOneBadge.style.display = 'flex';
+
+        fsLoopBtn.style.color = 'var(--theme-glow)';
+        fsLoopDot.style.opacity = '1';
+        fsLoopOneBadge.style.display = 'flex';
+      }
+    }
+
+    // Audio Metadata Loaded: Update timeline durations
+    audio.addEventListener('loadedmetadata', () => {
+      const dur = Math.floor(audio.duration);
+      progressTimeDuration.textContent = formatTime(audio.duration);
+      fsTimeDuration.textContent = formatTime(audio.duration);
+      
+      progressSlider.max = dur;
+      fsProgressSlider.max = dur;
+      
+      progressSlider.value = 0;
+      fsProgressSlider.value = 0;
+      
+      updateSliderBackground(progressSlider);
+      updateSliderBackground(fsProgressSlider);
+    });
+
+    // Audio Time Update: Track play position & auto-scroll timeline
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        const curTime = Math.floor(audio.currentTime);
+        progressSlider.value = curTime;
+        fsProgressSlider.value = curTime;
+        
+        progressTimeCurrent.textContent = formatTime(audio.currentTime);
+        fsTimeCurrent.textContent = formatTime(audio.currentTime);
+        
+        updateSliderBackground(progressSlider);
+        updateSliderBackground(fsProgressSlider);
+      }
+    });
+
+    // Scrubber timeline manual seek (Playbar)
+    progressSlider.addEventListener('input', () => {
+      audio.currentTime = progressSlider.value;
+      progressTimeCurrent.textContent = formatTime(progressSlider.value);
+      fsTimeCurrent.textContent = formatTime(progressSlider.value);
+      fsProgressSlider.value = progressSlider.value;
+      
+      updateSliderBackground(progressSlider);
+      updateSliderBackground(fsProgressSlider);
+    });
+
+    // Scrubber timeline manual seek (Fullscreen)
+    fsProgressSlider.addEventListener('input', () => {
+      audio.currentTime = fsProgressSlider.value;
+      progressTimeCurrent.textContent = formatTime(fsProgressSlider.value);
+      fsTimeCurrent.textContent = formatTime(fsProgressSlider.value);
+      progressSlider.value = fsProgressSlider.value;
+      
+      updateSliderBackground(progressSlider);
+      updateSliderBackground(fsProgressSlider);
+    });
+
+    // High Fidelity Sync Volume State controller
+    function syncVolumeState(val) {
+      audio.volume = val;
+      const percent = Math.floor(val * 100);
+      volumeSlider.value = percent;
+      fsVolumeSlider.value = percent;
+      volumeLbl.textContent = `${percent}%`;
+      updateVolumeIcon(val);
+      updateSliderBackground(volumeSlider);
+      updateSliderBackground(fsVolumeSlider);
+    }
+
+    function updateVolumeIcon(vol) {
+      if (vol === 0) {
+        volumeIconStatus.className = 'fa-solid fa-volume-xmark';
+        volumeIconStatus.style.color = '#ff3333';
+        fsVolumeIconStatus.className = 'fa-solid fa-volume-xmark';
+        fsVolumeIconStatus.style.color = '#ff3333';
+      } else if (vol < 0.4) {
+        volumeIconStatus.className = 'fa-solid fa-volume-low';
+        volumeIconStatus.style.color = 'var(--text-muted)';
+        fsVolumeIconStatus.className = 'fa-solid fa-volume-low';
+        fsVolumeIconStatus.style.color = 'rgba(255,255,255,0.4)';
+      } else {
+        volumeIconStatus.className = 'fa-solid fa-volume-high';
+        volumeIconStatus.style.color = 'var(--theme-glow)';
+        fsVolumeIconStatus.className = 'fa-solid fa-volume-high';
+        fsVolumeIconStatus.style.color = 'var(--theme-glow)';
+      }
+    }
+
+    // Volume Adjustment Scrubber (Playbar)
+    volumeSlider.addEventListener('input', () => {
+      const volVal = volumeSlider.value / 100;
+      syncVolumeState(volVal);
+    });
+
+    // Volume Adjustment Scrubber (Fullscreen)
+    fsVolumeSlider.addEventListener('input', () => {
+      const volVal = fsVolumeSlider.value / 100;
+      syncVolumeState(volVal);
+    });
+
+    // Mute Volume Trigger (Playbar)
+    volumeMuteBtn.addEventListener('click', () => {
+      if (audio.volume > 0) {
+        originalVolume = audio.volume;
+        syncVolumeState(0);
+      } else {
+        syncVolumeState(originalVolume);
+      }
+    });
+
+    // Mute Volume Trigger (Fullscreen)
+    fsVolumeIconStatus.parentNode.addEventListener('click', () => {
+      if (audio.volume > 0) {
+        originalVolume = audio.volume;
+        syncVolumeState(0);
+      } else {
+        syncVolumeState(originalVolume);
+      }
+    });
+
+    // Open/Close Fullscreen Handlers
+    function openFullscreenMode() {
+      fsPlayer.classList.add('active');
+      syncVolumeState(audio.volume);
+      document.body.style.overflow = 'hidden'; // Lock dashboard scroll when in fullscreen
+    }
+
+    function closeFullscreenMode() {
+      fsPlayer.classList.remove('active');
+      document.body.style.overflow = ''; // Restore dashboard scroll
+    }
+
+    fsOpenBtn.addEventListener('click', openFullscreenMode);
+    fsCloseBtn.addEventListener('click', closeFullscreenMode);
+
+    // Escape Key Support to Exit Fullscreen
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeFullscreenMode();
+      }
+    });
+
+    // Song Playback Ended -> Autoplay loop state triggers
+    audio.addEventListener('ended', () => {
+      if (repeatState === 2) {
+        // Loop current single track
+        audio.currentTime = 0;
+        playTrack();
+      } else {
+        // Proceed next
+        playNextTrack();
+      }
+    });
+
+    // Load initial first track on DOM ready
+    window.addEventListener('DOMContentLoaded', () => {
+      updateShuffleUI();
+      updateLoopUI();
+      loadTrack(0);
+      syncVolumeState(originalVolume);
+    });
+  </script>
+
+  <!-- functional targeted submissions ajax -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const artistForm = document.getElementById('skyball-contact-form'); // Target standard or sidak form
+      const actualForm = artistForm || document.getElementById('skyball-artist-form');
+      if (!actualForm) return;
+
+      const statusDiv = actualForm.querySelector('.form-status');
+      const submitBtn = actualForm.querySelector('.form-submit-btn');
+
+      actualForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('form-name').value.trim();
+        const email = document.getElementById('form-email').value.trim();
+        const message = document.getElementById('form-message').value.trim();
+        const intendedArtist = document.getElementById('form-artist-flag').value.trim();
+
+        statusDiv.style.display = 'none';
+        statusDiv.className = 'form-status';
+        statusDiv.textContent = '';
+
+        if (!name || !email || !message) {
+          showStatus('error', 'Please fill in all fields before sending.');
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showStatus('error', 'Please enter a valid email address.');
+          return;
+        }
+
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Transmitting Parameters...</span>`;
+
+        try {
+          const data = await submitSkyballContact({ name, email, message, intendedArtist });
+          showStatus('success', data.message);
+          actualForm.reset();
+        } catch (err) {
+          console.error('Submission form error:', err);
+          showStatus('error', err.message || 'Failed to transmit message. Please check your network connection.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      });
+
+      function showStatus(type, msg) {
+        statusDiv.style.display = 'block';
+        statusDiv.className = `form-status ${type}`;
+        statusDiv.textContent = msg;
+        statusDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  </script>
+
+</body>
+</html>

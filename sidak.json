@@ -1,0 +1,49 @@
+{
+  "username": "sidak",
+  "name": "Sidak Sethi",
+  "role": "Mix & Master Engineer / Producer",
+  "department": "Audio Engineering & Music Production",
+  "bio": "Sidak Sethi is a premier music producer and mix/master engineer at Skyball Studio. Mastering the delicate balance of frequency spacing, dynamic range, and high-fidelity transients, he breathes professional club-ready power into every production.",
+  "theme": "celeste",
+  "socials": {
+    "linkedin": "https://linkedin.com",
+    "instagram": "https://instagram.com"
+  },
+  "tracks": [
+    {
+      "title": "Mai Tere Peeche",
+      "artist": "Monch Chettri",
+      "role": "Mixed & Mastered",
+      "youtube": "https://www.youtube.com/watch?v=6QtwfO8NyMg",
+      "filename": "Monch Chettri - Mai tere peeche (official music video).mp3"
+    },
+    {
+      "title": "Tum Aao",
+      "artist": "Sidak & Monch ft. Sumira",
+      "role": "Producer",
+      "youtube": "https://www.youtube.com/watch?v=9HJ71oyvSBo",
+      "filename": "Tum Aao - Monch ft. Sumira ｜ Midnight Confession EP ｜ Official lyrical video.mp3"
+    },
+    {
+      "title": "Me and You",
+      "artist": "Monch & Sidak ft. Yogen",
+      "role": "Co-Artist & Producer",
+      "youtube": "https://www.youtube.com/watch?v=2BdBch5F_eY",
+      "filename": "Me and you - Monch & Sidak ft. Yogen ｜ Midnight confession ｜ official lyrical visualiser.mp3"
+    },
+    {
+      "title": "Mere Saajna",
+      "artist": "Sidak & Monch",
+      "role": "Co-Artist & Producer",
+      "youtube": "https://www.youtube.com/watch?v=-haDiPQkb7c",
+      "filename": "Mere Saajna - Sidak & Monch ｜ Midnight Confession ｜ official visualiser.mp3"
+    },
+    {
+      "title": "Under Pressure",
+      "artist": "Sidak x Tejas VLV",
+      "role": "Co-Artist & Producer",
+      "youtube": "https://youtu.be/E9_636WLNXo",
+      "filename": "UNDER PREESURE – SIDAK x TEJAS VLV ｜ New R&B Song 2026.mp3"
+    }
+  ]
+}

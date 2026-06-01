@@ -1,0 +1,104 @@
+{
+  "lee": {
+    "username": "lee",
+    "name": "Lee Rang",
+    "role": "Digital Illustrator",
+    "department": "2D Illustration & Conceptual Art",
+    "bio": "Lee Rang is a premier digital illustrator at Skyball Studio. Specializing in high-concept character studies, atmospheric illustrations, and traditional outfit details, he crafts visually striking assets that bridge storytelling and play.",
+    "theme": "creativa",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/dev-rigan-koijam-9a8444267/",
+      "instagram": "https://www.instagram.com/tsuyanlee.art/"
+    }
+  },
+  "pritam": {
+    "username": "pritam",
+    "name": "Pritam Kundu",
+    "role": "3D Character & Creature Artist",
+    "department": "3D Modeling & Mesh Optimization",
+    "bio": "Pritam is a passionate 3D character and creature artist at Skyball Studio. He specializes in stylized character sculpting, dynamic action poses, and engine-optimized asset meshes designed for real-time play.",
+    "theme": "celeste",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/3dfi/",
+      "instagram": "https://instagram.com"
+    },
+    "artworks": [
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/pritam-kundu-3d_fi_-fresya-pose-3-with-bg.jpg",
+        "title": "Fresya Pose Model",
+        "category": "3D Render",
+        "desc": "Stylized 3D character sculpting, mapping, and anatomy posing."
+      },
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/pritam-kundu-3d_fi_-frogspidey-dop.jpg",
+        "title": "FrogSpidey Concept Mesh",
+        "category": "3D Render",
+        "desc": "Engine-optimized stylized creature asset mesh with hand-painted textures."
+      }
+    ]
+  },
+  "abhijeet": {
+    "username": "abhijeet",
+    "name": "Abhijeet Ranjan",
+    "role": "Lead 2D Concept Illustrator",
+    "department": "2D Concept & Visual Foundations",
+    "bio": "Abhijeet is the lead 2D illustrator and character concept designer at Skyball Studio. His drawings focus on dramatic expressions, custom storyboard panels, and highly stylized illustration aesthetics.",
+    "theme": "creativa",
+    "socials": {
+      "linkedin": "https://linkedin.com",
+      "instagram": "https://instagram.com"
+    },
+    "artworks": [
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-naruto-brosa-02.jpg",
+        "title": "Naruto Brosa Illustration",
+        "category": "2D Art",
+        "desc": "Vibrant custom character group study with dynamic composition."
+      },
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-naruto-brosa-02-5.jpg",
+        "title": "Naruto Brosa Detail Shot",
+        "category": "2D Art",
+        "desc": "High-definition close-up shot focusing on visual strokes."
+      },
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/abhijeet-ranjan-portrait-04.jpg",
+        "title": "Stylized Portrait Study",
+        "category": "2D Art",
+        "desc": "Character anatomy study exploring stylized portrait lighting."
+      }
+    ]
+  },
+  "pallavi": {
+    "username": "pallavi",
+    "name": "Pallavi Issrani",
+    "role": "Senior 3D Props & Environment Artist",
+    "department": "3D Asset Modeling & Prototyping",
+    "bio": "Pallavi is a senior 3D props and environment modeler at Skyball Studio. She is an expert in fantasy assets, industrial environmental props, stylized structures, and highly optimized game meshes.",
+    "theme": "celeste",
+    "socials": {
+      "linkedin": "https://linkedin.com",
+      "instagram": "https://instagram.com"
+    },
+    "artworks": [
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-cooking-pot.jpg",
+        "title": "Fantasy Cooking Pot Prop",
+        "category": "3D Render",
+        "desc": "Stylized texturing, dynamic lighting, and low-poly game asset model."
+      },
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-render2.jpg",
+        "title": "Environment Asset Study",
+        "category": "3D Render",
+        "desc": "Environment lighting mesh render exploring modular metallic mapping."
+      },
+      {
+        "src": "/assets/portfolio_stuff/Portfolio%20stuff/pallavi-issrani-bhb.jpg",
+        "title": "BHB Model Render",
+        "category": "3D Render",
+        "desc": "High-poly organic asset mesh with baked ambient occlusion."
+      }
+    ]
+  }
+}
