@@ -113,7 +113,12 @@ async function main() {
   fs.copyFileSync(path.join(distDir, 'index.html'), path.join(distDir, '404.html'));
 
   // Generate sitemap.xml
-  const siteUrl = (process.env.SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://skyballstudio.com')).replace(/\/$/, '');
+  const siteUrl = (
+    process.env.SITE_URL || 
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : null) ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+    'https://skyballstudio.com'
+  ).replace(/\/$/, '');
   const sitemapUrls = [
     `${siteUrl}/`,
     ...Object.keys(allMembers).map(memberKey => `${siteUrl}/portfolio/${memberKey}`)
