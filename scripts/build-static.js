@@ -112,6 +112,25 @@ async function main() {
   fs.writeFileSync(path.join(distDir, '.nojekyll'), '', 'utf8');
   fs.copyFileSync(path.join(distDir, 'index.html'), path.join(distDir, '404.html'));
 
+  // Generate sitemap.xml
+  const siteUrl = (process.env.SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://skyballstudio.com')).replace(/\/$/, '');
+  const sitemapUrls = [
+    `${siteUrl}/`,
+    ...Object.keys(allMembers).map(memberKey => `${siteUrl}/portfolio/${memberKey}`)
+  ];
+  
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.map(url => `  <url>
+    <loc>${url}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>${url.endsWith('/') ? '1.0' : '0.8'}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapXml, 'utf8');
+  console.log(`Generated sitemap.xml with ${sitemapUrls.length} URLs`);
+
   console.log(`Static build completed in dist/${basePath ? ` with BASE_PATH=${basePath}` : ''}`);
 }
 
