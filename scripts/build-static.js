@@ -6,6 +6,8 @@ const rootDir = path.join(__dirname, '..');
 const distDir = path.join(rootDir, 'dist');
 const basePath = normalizeBasePath(process.env.BASE_PATH || '');
 const publicContactWebhookUrl = process.env.PUBLIC_CONTACT_WEBHOOK_URL || '';
+const cdnUrl = (process.env.CDN_URL || '').replace(/\/$/, '');
+
 
 function normalizeBasePath(value) {
   if (!value || value === '/') return '';
@@ -48,13 +50,28 @@ function withStaticRuntime(html) {
 }
 
 function applyBasePath(html) {
-  if (!basePath) return html;
+  let result = html;
 
-  return html
-    .replace(/(["'`])\/(assets|css|js)\//g, `$1${basePath}/$2/`)
-    .replace(/url\((["']?)\/assets\//g, `url($1${basePath}/assets/`)
-    .replace(/href=(["'])\/#([^"']*)\1/g, `href=$1${basePath}/#$2$1`)
-    .replace(/href=(["'])\/\1/g, `href=$1${basePath}/$1`);
+  // Apply CDN URL prefix to assets if specified
+  if (cdnUrl) {
+    result = result
+      .replace(/(["'`])\/assets\//g, `$1${cdnUrl}/assets/`)
+      .replace(/url\((["']?)\/assets\//g, `url($1${cdnUrl}/assets/`);
+  } else if (basePath) {
+    result = result
+      .replace(/(["'`])\/assets\//g, `$1${basePath}/assets/`)
+      .replace(/url\((["']?)\/assets\//g, `url($1${basePath}/assets/`);
+  }
+
+  // Apply basePath to css and js
+  if (basePath) {
+    result = result
+      .replace(/(["'`])\/(css|js)\//g, `$1${basePath}/$2/`)
+      .replace(/href=(["'])\/#([^"']*)\1/g, `href=$1${basePath}/#$2$1`)
+      .replace(/href=(["'])\/\1/g, `href=$1${basePath}/$1`);
+  }
+
+  return result;
 }
 
 async function renderTemplate(templateName, outputPath, data = {}) {
