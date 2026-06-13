@@ -1,0 +1,6 @@
+# Allow all search engines and AI search bots to crawl and index the site
+User-agent: *
+Allow: /
+
+# Link to sitemap
+Sitemap: https://www.skyballstudio.com/sitemap.xml
