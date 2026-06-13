@@ -117,7 +117,7 @@ async function main() {
     process.env.SITE_URL || 
     (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : null) ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-    'https://skyballstudio.com'
+    'https://www.skyballstudio.com'
   ).replace(/\/$/, '');
   const sitemapUrls = [
     `${siteUrl}/`,
